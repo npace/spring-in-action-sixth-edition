@@ -1,8 +1,10 @@
 package com.example.tacocloud
 
+import jakarta.validation.Valid
 import mu.KotlinLogging
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
+import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.*
 import java.util.*
 
@@ -34,9 +36,18 @@ class DesignTacoController {
     }
 
     @PostMapping
-    fun processTaco(taco: Taco, @ModelAttribute tacoOrder: TacoOrder): String {
+    fun processTaco(
+        @Valid taco: Taco,
+        errors: Errors,
+        @ModelAttribute tacoOrder: TacoOrder
+    ): String {
+        logger.info { "Processing taco $taco\nerrors: $errors" }
+
+        if (errors.hasErrors()) {
+            return "design"
+        }
+
         tacoOrder.addTaco(taco)
-        logger.info { "Processing taco $taco" }
 
         return "redirect:/orders/current"
     }

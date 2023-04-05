@@ -2,3 +2,7 @@
     display: grid;
     grid-template-columns: repeat(2, 400px);
 }
+
+.validationError {
+    color: #f00;
+}
