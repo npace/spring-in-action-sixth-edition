@@ -1,7 +1,9 @@
 package com.example.tacocloud
 
+import com.example.tacocloud.data.IngredientRepository
 import jakarta.validation.Valid
 import mu.KotlinLogging
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.Errors
@@ -11,15 +13,19 @@ import java.util.*
 @Controller
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
-class DesignTacoController {
+class DesignTacoController @Autowired constructor(
+    private val ingredientRepository: IngredientRepository,
+) {
+
     private val logger = KotlinLogging.logger { }
 
     @ModelAttribute
     fun addIngredientsToModel(model: Model) {
+        val ingredients = ingredientRepository.findAll()
         Ingredient.Type.values().forEach { type ->
             model.addAttribute(
                 type.toString().lowercase(Locale.US),
-                Ingredient.allIngredients.filter { it.type == type }
+                ingredients.filter { it.type == type }
             )
         }
     }
