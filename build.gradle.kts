@@ -18,6 +18,10 @@ repositories {
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	runtimeOnly("com.h2database:h2")
+
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
