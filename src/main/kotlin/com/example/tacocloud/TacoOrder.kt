@@ -29,7 +29,7 @@ data class TacoOrder(
     var ccNumber: String? = null,
 
     @field:Pattern(
-        regexp = "^(0[1-9]|1[0-2])([\\/])([2-9][0-9])$",
+        regexp = "^(0[1-9]|1[0-2])(/)([2-9][0-9])$",
         message = "Must be formatted MM/YY"
     )
     var ccExpiration: String? = null,
