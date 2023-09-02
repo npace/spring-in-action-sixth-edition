@@ -1,5 +1,6 @@
 package com.example.tacocloud
 
+import com.example.tacocloud.data.OrderRepository
 import jakarta.validation.Valid
 import mu.KotlinLogging
 import org.springframework.stereotype.Controller
@@ -13,8 +14,10 @@ import org.springframework.web.bind.support.SessionStatus
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
-class OrderController {
-    private val logger = KotlinLogging.logger {  }
+class OrderController(
+    private val orderRepository: OrderRepository,
+) {
+    private val logger = KotlinLogging.logger { }
 
     @GetMapping("/current")
     fun orderForm(): String {
@@ -32,7 +35,7 @@ class OrderController {
         if (errors.hasErrors()) {
             return "orderForm"
         }
-
+        orderRepository.save(order)
         sessionStatus.setComplete()
 
         return "redirect:/"
