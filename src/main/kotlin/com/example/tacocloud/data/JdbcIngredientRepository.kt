@@ -41,11 +41,14 @@ class JdbcIngredientRepository(
         return ingredient
     }
 
-    private fun mapRowToIngredient(row: ResultSet, rowNum: Int): Ingredient {
+    private fun mapRowToIngredient(
+        row: ResultSet,
+        @Suppress("UNUSED_PARAMETER") rowNum: Int,
+    ): Ingredient {
         return Ingredient(
-            row.getString("id"),
-            row.getString("name"),
-            Ingredient.Type.valueOf(row.getString("type")),
+            id = row.getString("id"),
+            name = row.getString("name"),
+            type = Ingredient.Type.valueOf(row.getString("type")),
         )
     }
 }
