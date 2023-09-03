@@ -4,10 +4,12 @@ import jakarta.validation.constraints.Digits
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import org.hibernate.validator.constraints.CreditCardNumber
+import org.springframework.data.annotation.Id
 import java.util.*
 
 data class TacoOrder(
-    var id: Long = 0,
+    @field:Id var id: Long = 0,
+
     var placedAt: Date = Date(),
 
     @field:NotBlank(message = "Delivery name is required")

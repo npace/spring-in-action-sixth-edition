@@ -1,11 +1,11 @@
 package com.example.tacocloud
 
 import jakarta.validation.constraints.Size
+import org.springframework.data.annotation.Id
 import java.util.*
 
 data class Taco(
-    var id: Long = 0,
-    var createdAd: Date = Date(),
+    @field:Id var id: Long = 0,
 
     var createdAt: Date = Date(),
 

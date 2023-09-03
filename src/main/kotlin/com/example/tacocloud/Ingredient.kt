@@ -1,7 +1,9 @@
 package com.example.tacocloud
 
+import org.springframework.data.annotation.Id
+
 data class Ingredient(
-    val id: String,
+    @field:Id val id: String,
     val name: String,
     val type: Type,
 ) {
