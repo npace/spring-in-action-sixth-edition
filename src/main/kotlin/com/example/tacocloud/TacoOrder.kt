@@ -1,14 +1,22 @@
 package com.example.tacocloud
 
+import jakarta.persistence.CascadeType
+import jakarta.persistence.Entity
+import jakarta.persistence.GeneratedValue
+import jakarta.persistence.GenerationType
+import jakarta.persistence.Id
+import jakarta.persistence.OneToMany
 import jakarta.validation.constraints.Digits
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
 import org.hibernate.validator.constraints.CreditCardNumber
-import org.springframework.data.annotation.Id
 import java.util.*
 
+@Entity
 data class TacoOrder(
-    @field:Id var id: Long = 0,
+    @field:Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    var id: Long = 0,
 
     var placedAt: Date = Date(),
 
@@ -39,6 +47,7 @@ data class TacoOrder(
     @field:Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     var ccCVV: String? = null,
 
+    @OneToMany(cascade = [CascadeType.ALL])
     val tacos: MutableList<Taco> = mutableListOf(),
 ) {
 

@@ -1,11 +1,13 @@
 package com.example.tacocloud
 
-import org.springframework.data.annotation.Id
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
 
+@Entity
 data class Ingredient(
-    @field:Id val id: String,
-    val name: String,
-    val type: Type,
+    @field:Id val id: String = "",
+    val name: String = "",
+    val type: Type = Type.Wrap,
 ) {
     enum class Type {
         Wrap,
